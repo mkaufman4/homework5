@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Drawing Area</title>
+<!-- You can add your style here rather than in an external style sheet. -->
+<style>
+	canvas {
+	    border:5px solid #d3d3d3;
+	    background-color: #f1f1f1;
+	    display: block;
+	}
+</style>
+</head>
+<body>
+    <!-- DO NOT MODIFY THIS HTML -->
+    <canvas id = "myCanvas" width = "350" height = "500"  ></canvas>
+    <input type = "color" id = "picker"/>
+		<!-- DO NOT MODIFY THIS HTML -->
+
+
+<script>
+	  var canvas = document.getElementById('myCanvas');
+	  var ctx = canvas.getContext('2d');
+	  ctx.fillStyle = color;
+		ctx.canvas.width = window.innerWidth * .8;
+		ctx.canvas.height = window.innerHeight * .8;
+		var color = "black";
+		var imDrawing=true;
+
+
+	  function draw(posX, posY){
+		    ctx.beginPath();
+		    ctx.arc(posX,posY,10,0,2 * Math.PI);
+		    ctx.fillStyle = color;
+		    ctx.fill();
+	  }
+	  myCanvas.addEventListener('mousemove', function(e){
+			if (imDrawing == true){
+	    	draw(e.x, e.y);
+			}
+	  })
+
+		var colorpicker=document.getElementById('picker');
+		window.addEventListener('change', function(e){
+			color=colorpicker.value;
+			ctx.fillStyle=color;
+			ctx.strokeStyle=color;
+		})
+
+		window.addEventListener('keydown',function(e){
+			if (e.keyCode==89){
+				color="yellow";
+			}
+			if (e.keyCode==71){
+				color='green';
+			}
+			if (e.keyCode ==82){
+				color="red";
+			}
+			if (e.keyCode==66){
+				color="blue";
+			}
+
+			if (e.keyCode==38){
+				imDrawing=false;
+			}
+			if (e.keyCode==40){
+				imDrawing=true;
+			}
+			if (e.keycode==32){
+				ctx.clearRect( 0 , 0 , canvas.width, canvas.height);
+			}
+
+		})
+	  </script>
+</body>
+</html>
